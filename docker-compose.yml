@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   runner:
-    image: youssefbrr/github-actions:latest # You can use this image or build your own
+    build: .
+    context: ./docker/Dockerfile
     restart: always
     environment:
       - REPO
