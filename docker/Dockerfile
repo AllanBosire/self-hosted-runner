@@ -2,6 +2,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG RUNNER_VERSION="2.331.0"
 ARG DEBIAN_FRONTEND=noninteractive
+ARG NODE_VERSION=20
 
 # Update and upgrade the system
 RUN apt update -y && apt upgrade -y
@@ -26,6 +27,20 @@ COPY --chmod=+x start.sh /start.sh
 
 # Switch to docker user
 USER docker
+
+# Use bash for the shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# Create a script file sourced by both interactive and non-interactive bash shells
+ENV BASH_ENV=/home/user/.bash_env
+RUN touch "${BASH_ENV}"
+RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
+
+# Download and install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | PROFILE="${BASH_ENV}" bash
+RUN echo node > .nvmrc
+RUN nvm install ${NODE_VERSION}
+
+RUN curl -fsSL https://get.docker.com/ | sh
 
 # Define the entrypoint
 ENTRYPOINT ["/start.sh"]
