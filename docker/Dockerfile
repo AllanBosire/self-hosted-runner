@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG RUNNER_VERSION="2.331.0"
 ARG DEBIAN_FRONTEND=noninteractive

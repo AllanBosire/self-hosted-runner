@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   runner:
-    image: custom-github-runner-mac:latest
+    build: ./docker
     platform: linux/arm64
     restart: always
     environment:
