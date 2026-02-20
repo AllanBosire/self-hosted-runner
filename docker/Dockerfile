@@ -1,4 +1,4 @@
-FROM sbdev/toolbox:latest
+FROM myoung34/github-runner
 
 ARG RUNNER_VERSION="2.331.0"
 ARG DEBIAN_FRONTEND=noninteractive
