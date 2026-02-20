@@ -25,11 +25,9 @@ RUN chown -R docker /home/docker && /home/docker/actions-runner/bin/installdepen
 # Copy the start script and make it executable
 COPY --chmod=+x start.sh /start.sh
 
-# Switch to docker user
-USER docker
 
 # install curl
-RUN apt update && apt install curl -y
+RUN sudo apt update && apt install curl -y
 
 # install nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
@@ -39,6 +37,10 @@ ENV NVM_DIR=/root/.nvm
 
 # install node
 RUN bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION"
+
+
+# Switch to docker user
+USER docker
 
 # Define the entrypoint
 ENTRYPOINT ["/start.sh"]
