@@ -1,4 +1,4 @@
-FROM ghcr.io/actions/runner-image
+FROM sbdev/toolbox:latest
 
 ARG RUNNER_VERSION="2.331.0"
 ARG DEBIAN_FRONTEND=noninteractive
