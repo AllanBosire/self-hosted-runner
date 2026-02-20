@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+FROM ghcr.io/actions/runner-image:latest
 
 ARG RUNNER_VERSION="2.331.0"
 ARG DEBIAN_FRONTEND=noninteractive
@@ -24,20 +24,6 @@ RUN chown -R docker /home/docker && /home/docker/actions-runner/bin/installdepen
 
 # Copy the start script and make it executable
 COPY --chmod=+x start.sh /start.sh
-
-
-# install curl
-RUN sudo apt update && apt install curl -y
-
-# install nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
-
-# set env
-ENV NVM_DIR=/root/.nvm
-
-# install node
-RUN bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION"
-
 
 # Switch to docker user
 USER docker
