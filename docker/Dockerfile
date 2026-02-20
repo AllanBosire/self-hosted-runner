@@ -1,4 +1,4 @@
-FROM ghcr.io/actions/runner-image:latest
+FROM ghcr.io/actions/runner-image
 
 ARG RUNNER_VERSION="2.331.0"
 ARG DEBIAN_FRONTEND=noninteractive
